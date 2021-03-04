@@ -28,6 +28,13 @@ Then, extract it. It is recommend for Ubuntu 20.04 users to extract it with unra
 
 Finally, mount the bsn.vbox with your favorite VM Manager (we recommend VirtualBox)
 
+The password from the virtual machine is the same as the user. So,
+
+```
+user: bsn
+password: bsn
+```
+
 ### 1.2) Execute the SA-BSN
 
 Configure roslaunch files for personalized execution under '/catkin_ws/src/bsn/configurations';
