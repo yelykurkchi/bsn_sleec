@@ -61,7 +61,7 @@ python3 analyzer.py [logID] [metric] [plot_component_metrics] [setpoint]
 where:
 
 * [logID] is the ID for the execution log files previously mentioned.
-* [metric] is the metric to be analyzed, which values can be twofold: (1) reliability or (2) cost.
+* [metric] is the QoS attribute to be analyzed, which values can be twofold: (1) reliability or (2) cost, according to the adaptation setup in the launch file.
 * [plot_component_metrics] is a parameter that defines if the graphic which will be shown at the end of analysis will contain components local reliabilities or not. The components local reliabilities will be present if this is equal to True or true and only the system's global reliability will be present otherwise.
 * [setpoint] will be the value of the setpoint used in the execution. This needs to be the same as the one defined in the System Manager launch file.
 
