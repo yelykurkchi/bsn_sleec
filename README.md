@@ -6,7 +6,7 @@ This is an implementation of the SA-BSN. So far, the SA-BSN was used for experim
 
 Check our [demonstration video of the SA-BSN](https://youtu.be/iDEd_tW9JZE).
 
-Download our [SA-BSN Virtual Machine (Virtual Box) for People in a Hurry](https://drive.google.com/file/d/18APQNBNZM7Pp_bFGyuChOH1uivf4YEV1/view?usp=sharing). 
+Download our [SA-BSN Virtual Machine (Virtual Box) for People in a Hurry](https://drive.google.com/file/d/1RYrZ27LWRvqaxsgNcApXMxwrLK6BBPsV/view?usp=sharing). 
 (_~10 minutes!!_)
 
 
