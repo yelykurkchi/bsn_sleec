@@ -139,6 +139,7 @@ script:
   - doxygen doxyfile
 
 deploy:
+  edge: true
   provider: pages
   skip_cleanup: true
   local_dir: $TRAVIS_BUILD_DIR/doxydocs/html
