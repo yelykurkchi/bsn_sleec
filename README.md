@@ -113,3 +113,7 @@ Main Authors
 * [**Samuel Couto**](https://github.com/SCouto97)
 
 Adviser: [**Genaína N. Rodrigues**](https://cic.unb.br/~genaina)
+
+## Acknowledgment
+
+This study was financed in part by CAPES-Brasil – Finance Code 001, through CAPES scholarship, by CNpq under grant number 306017/2018-0, by University of Brasilia under Call DPI/DPG 03/2020, by FAPDF Call 03/2018 by the Wallenberg Al, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation
