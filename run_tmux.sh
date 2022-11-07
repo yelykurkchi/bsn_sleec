@@ -140,6 +140,6 @@ tmux new-window \
     "$(preLaunch ${config_name}) && roslaunch --pid=/var/tmp/injector.pid injector.launch"
 
 # see file .devcontainer/additional_bashrc for this command's source 
-sleep ${exec_time}s && cleanupBSN &
+sleep "${exec_time}"s && cleanupBSN &
 
 tmux a -t ${SESSION_NAME}
