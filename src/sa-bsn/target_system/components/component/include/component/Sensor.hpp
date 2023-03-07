@@ -12,6 +12,8 @@
 #include "libbsn/resource/Battery.hpp"
 #include "libbsn/utils/utils.hpp"
 
+#include <std_msgs/Float32.h>
+
 class Sensor : public arch::target_system::Component {
 
     public:
@@ -30,6 +32,7 @@ class Sensor : public arch::target_system::Component {
 
         void reconfigure(const archlib::AdaptationCommand::ConstPtr& msg);
         void injectUncertainty(const archlib::Uncertainty::ConstPtr& msg);
+        void collectSensorData(const std_msgs::Float32::ConstPtr& msg);
 		
         virtual double collect() = 0;
         virtual double process(const double &data) = 0;
