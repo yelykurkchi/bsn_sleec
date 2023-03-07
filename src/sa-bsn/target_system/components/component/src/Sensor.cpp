@@ -21,6 +21,8 @@ int32_t Sensor::run() {
         Component::shutdownComponent();
     }
 
+    this->connectedSensor = false;
+
     ros::NodeHandle nh;
     ros::Subscriber noise_subs = nh.subscribe("uncertainty_"+ros::this_node::getName(), 10, &Sensor::injectUncertainty, this);
     ros::Subscriber reconfig_subs = nh.subscribe("reconfigure_"+ros::this_node::getName(), 10, &Sensor::reconfigure, this);
@@ -160,6 +162,6 @@ void Sensor::recharge() {
 }
 
 void Sensor::collectSensorData(const std_msgs::Float32::ConstPtr& msg) {
-    float collect_sensor = msg->data;
-    ROS_INFO("Received sensor data: [%f]", msg->data);
+    this->collectSensor = msg->data;
+    this->connectedSensor = true;
 }
