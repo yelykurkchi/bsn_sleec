@@ -13,6 +13,7 @@
 #include "libbsn/utils/utils.hpp"
 
 #include <std_msgs/Float32.h>
+#include <std_srvs/SetBool.h>
 
 class Sensor : public arch::target_system::Component {
 
@@ -32,7 +33,6 @@ class Sensor : public arch::target_system::Component {
 
         void reconfigure(const archlib::AdaptationCommand::ConstPtr& msg);
         void injectUncertainty(const archlib::Uncertainty::ConstPtr& msg);
-        void collectSensorData(const std_msgs::Float32::ConstPtr& msg);
 		
         virtual double collect() = 0;
         virtual double process(const double &data) = 0;
@@ -55,8 +55,7 @@ class Sensor : public arch::target_system::Component {
         bool instant_recharge;
         bool shouldStart;
         double cost;
-        float collectSensor;
-        bool connectedSensor;
+        bool connected_sensor;
 };
 
 #endif 

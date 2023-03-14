@@ -87,14 +87,23 @@ void G3T1_3::tearDown() {
 double G3T1_3::collect() {
 
     double m_data = 0;
-    if(connectedSensor) {
-        m_data = collectSensor;
-        ROS_INFO("data read from sensor: [%s]", std::to_string(m_data).c_str());
+    std::string res;
+    if(connected_sensor) {
+        ros::ServiceClient client = handle.serviceClient<std_srvs::SetBool>("temp");
+        std_srvs::SetBool srv;
+        srv.request.data = true;
+            if (client.call(srv)) {
+            res = srv.response.message;
+            m_data = std::stof(res);
+            ROS_INFO("new data collected: [%s]", std::to_string(m_data).c_str());
+        } else {
+            ROS_INFO("error collecting data");
+        }
     } else{
-            ros::ServiceClient client = handle.serviceClient<services::PatientData>("getPatientData");
+        ros::ServiceClient client = handle.serviceClient<services::PatientData>("getPatientData");
         services::PatientData srv;
 
-        srv.request.vitalSign = "temperature";
+        srv.request.vitalSign = "oxigenation";
 
         if (client.call(srv)) {
             m_data = srv.response.data;

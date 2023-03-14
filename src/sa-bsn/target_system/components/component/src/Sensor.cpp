@@ -21,12 +21,13 @@ int32_t Sensor::run() {
         Component::shutdownComponent();
     }
 
-    this->connectedSensor = false;
 
     ros::NodeHandle nh;
     ros::Subscriber noise_subs = nh.subscribe("uncertainty_"+ros::this_node::getName(), 10, &Sensor::injectUncertainty, this);
     ros::Subscriber reconfig_subs = nh.subscribe("reconfigure_"+ros::this_node::getName(), 10, &Sensor::reconfigure, this);
-    ros::Subscriber sensor_subs = nh.subscribe(ros::this_node::getName()+"_sensor", 10, &Sensor::collectSensorData, this);
+
+    nh.getParam("connect_sensor", connected_sensor);
+    ROS_INFO("Sensor connected = %d", connected_sensor);
     
 
 
@@ -159,9 +160,4 @@ void Sensor::recharge() {
     } else {
         battery.generate(100);
     }
-}
-
-void Sensor::collectSensorData(const std_msgs::Float32::ConstPtr& msg) {
-    this->collectSensor = msg->data;
-    this->connectedSensor = true;
 }
