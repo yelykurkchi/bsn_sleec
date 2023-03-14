@@ -18,4 +18,7 @@
     <!-- instant recharge parameter-->
     <param name="instant_recharge" value="true" type="bool" />
 
+    <!-- real world parameter-->
+    <param name="connect_sensor" value="false" type="bool" />
+
 </launch>
