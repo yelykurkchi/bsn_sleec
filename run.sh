@@ -63,4 +63,4 @@ kill $(cat /var/tmp/patient.pid && rm /var/tmp/patient.pid) & sleep 1s
 kill $(cat /var/tmp/injector.pid && rm /var/tmp/injector.pid) & sleep 1s
 kill $(cat /var/tmp/strategy_manager.pid && rm /var/tmp/strategy_manager.pid) & sleep 1s
 
-kill $(pgrep roscore)
+#kill $(pgrep roscore)

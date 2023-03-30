@@ -1,8 +1,8 @@
 bsn=$PWD/src/sa-bsn
 exec_time=0
 
-if [[ "$#" -gt 1 ]]; then
-    echo "Too many arguments were passed!"
+if [[ "$#" -ne 2 ]]; then
+    echo "Invalid number of arguments! Please provide exactly 2 arguments."
     exit 1
 fi
 
@@ -18,6 +18,9 @@ if [[ -n ${exec_time//[0-9]/} ]]; then
 fi
 
 gnome-terminal -x roscore & sleep 5s
+
+################# CONNECT ARDUINO #################
+gnome-terminal -x rosrun rosserial_python serial_node.py $2
 
 ################# KNOWLEDGE REPOSITORY #################
 gnome-terminal --working-directory=${bsn}/configurations/knowledge_repository -e 'roslaunch --pid=/var/tmp/data_access.pid data_access.launch' & sleep 1s
@@ -54,7 +57,7 @@ kill $(cat /var/tmp/g3t1_1.pid && rm /var/tmp/g3t1_1.pid) & sleep 1s
 kill $(cat /var/tmp/g3t1_2.pid && rm /var/tmp/g3t1_2.pid) & sleep 1s
 kill $(cat /var/tmp/g3t1_3.pid && rm /var/tmp/g3t1_3.pid) & sleep 1s
 kill $(cat /var/tmp/patient.pid && rm /var/tmp/patient.pid) & sleep 1s
-kill $(cat /var/tmp/injector.pid && rm /var/tmp/injector.pid) & sleep 1s
 kill $(cat /var/tmp/strategy_manager.pid && rm /var/tmp/strategy_manager.pid) & sleep 1s
 
-#kill $(pgrep roscore)
+rosnode kill -a
+kill $(pgrep roscore)
