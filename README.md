@@ -62,6 +62,10 @@ catkin_make run_tests && catkin_test_results
 The SA-BSN's execution relies on a single command, where the argument (i.e., 600) represents the execution time (in seconds):
 
 ```
+roscore
+```
+
+```
 cd bsn && 
 mon launch bsn.launch
 ``` 
