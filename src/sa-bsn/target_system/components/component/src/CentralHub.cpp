@@ -70,13 +70,8 @@ void CentralHub::reconfigure(const archlib::AdaptationCommand::ConstPtr& msg) {
             rosComponentDescriptor.setFreq(rosComponentDescriptor.getFreq()+stoi(param[1]));
         }*/
         if(param[0]=="freq"){
-            //double new_freq = rosComponentDescriptor.getFreq()+stoi(param[1]);
             double new_freq = stod(param[1]);
             rosComponentDescriptor.setFreq(new_freq);
-            /*std::cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << std::endl; 
-            ROS_INFO("Calculated New Frequency: [%s]", std::to_string(new_freq).c_str());
-            ROS_INFO("New Frequency: [%s]", std::to_string(rosComponentDescriptor.getFreq()).c_str());
-            std::cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << std::endl;*/
         }
     }
 }
