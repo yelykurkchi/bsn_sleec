@@ -1,5 +1,5 @@
 #include "enactor/Enactor.hpp"
-#define W(x) std::cerr << #x << " = " << x << std::endl;
+#define W(x) std::cer%sr,#%sx," = %s",x);
 
 Enactor::Enactor(int &argc, char **argv, std::string name) : ROSComponent(argc, argv, name), cycles(0), stability_margin(0.02) {}
 
@@ -46,7 +46,6 @@ void Enactor::receiveStatus() {
     }
     
     std::string ans = r_srv.response.content;
-    // std::cout << "received=> [" << ans << "]" << std::endl;
     if (ans == "") {
         ROS_ERROR("Received empty answer when asked for status.");
     }
@@ -102,14 +101,13 @@ void Enactor::body(){
 void Enactor::print() {
     /*
     for(std::vector<std::string>::iterator it = connected.begin(); it != connected.end(); ++it) {
-        std::cout << "****************************************" << std::endl;
-        std::cout << *it << std::endl;
-        std::cout << "  - invocations: [";
-        for(std::deque<int>::iterator itt = invocations[*it].begin(); itt != invocations[*it].end(); ++itt) std::cout << *itt << " ";
-        std::cout << "]" << std::endl;
-        std::cout << "  - r curr: " << r_curr[*it] << std::endl;
-        std::cout << "  - buffer size: " << replicate_task[*it] << std::endl;
-        std::cout << "****************************************" << std::endl;
+        ROS_DEBUG("****************************************");
+        ROS_DEBUG("%s - - invocations: [",*it);
+        for(std::deque<int>::iterator itt = invocations[*it].begin(); itt != invocations[*it].end(); ++itt) ROS_DEBUG(*it%st," ";
+        ROS_DEBUG("]");
+        ROS_DEBUG("  - r curr: %s",r_curr[*it]);
+        ROS_DEBUG("  - buffer size: %s",replicate_task[*it]);
+        ROS_DEBUG("****************************************");
     }
     */
 }
