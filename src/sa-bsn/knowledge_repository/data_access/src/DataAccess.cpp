@@ -138,7 +138,7 @@ void DataAccess::body() {
 }
 
 void DataAccess::receivePersistMessage(const archlib::Persist::ConstPtr& msg) {
-    ROS_INFO("I heard: [%s]", msg->type.c_str());
+    ROS_DEBUG("I heard: [%s]", msg->type.c_str());
     ++logical_clock;
 
     if (msg->type == "Status") {

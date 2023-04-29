@@ -118,7 +118,7 @@ void CostEngine::monitor() {
         std::vector<std::string> values = bsn::utils::split(second, ',');
 
         strategy["W_" + first] = stod(values[values.size()-1]);
-        std::cout << "W_" + first + " = " << strategy["W_" + first] << std::endl;
+        ROS_DEBUG("W_%s = %.2f",first.c_str(), strategy["W_" + first]);
     } 
 
     //request context status for all tasks
@@ -133,7 +133,6 @@ void CostEngine::monitor() {
     
     //expecting smth like: "/g3t1_1:activate;/g4t1:deactivate; ..."
     ans = c_srv.response.content;
-    //std::cout << "received=> [" << ans << "]" << std::endl;
 
     if (ans == "") {
         ROS_ERROR("Received empty answer when asked for event.");
@@ -159,7 +158,7 @@ void CostEngine::monitor() {
                 if (value == "deactivate") {
                     strategy["W_" + first] = 0;
                     deactivatedComponents["W_" + first] = 1;
-                    std::cout << first + " was deactivated and its cost was set to 0" << std::endl;
+                    ROS_WARN("%s was deactivated and its cost was set to 0", first.c_str());
                 }
             } else {
                 if (value == "activate") {
@@ -177,18 +176,13 @@ void CostEngine::monitor() {
 }
  
 void CostEngine::analyze() {
-    std::cout << "[analyze]" << std::endl;
-
-    //std::cout << "strategy: [";
-    //for (std::map<std::string,double>::iterator itt = strategy.begin(); itt != strategy.end(); ++itt) {
-    //   std::cout<< itt->first << ":" << itt->second << ", ";
-    //}
+    ROS_DEBUG(" ");
 
     double r_curr, c_curr;
     double error;
     c_curr = calculate_qos(target_system_model,strategy);
-    std::cout << "current system cost: " <<  c_curr << std::endl;
-    
+    ROS_DEBUG("c_curr= %.2f",c_curr);
+
     archlib::EnergyStatus msg;
     msg.source = "/engine";
     msg.content = "global:" + std::to_string(c_curr) + ";";
@@ -219,13 +213,13 @@ void CostEngine::analyze() {
 }
 
 void CostEngine::plan() {
-    std::cout << "[plan]" << std::endl;
+    ROS_DEBUG(" ");
 
-    std::cout << "setpoint= " << setpoint << std::endl;
+    ROS_DEBUG ("setpoint= %.2f", setpoint);
     double c_curr = calculate_qos(target_system_model,strategy);
-    std::cout << "c_curr= " << c_curr << std::endl;
+    ROS_DEBUG("c_curr= %.2f",c_curr);
     double error = setpoint - c_curr;
-    std::cout << "error= " << error << std::endl;
+    ROS_DEBUG("error= %.2f",error);
 
     //reset the formula_str
     std::vector<std::string> c_vec;
@@ -271,18 +265,10 @@ void CostEngine::plan() {
         }
     }
 
-    //print ordered r_vec
-    std::cout << "ordered c_vec: [";
-    for(std::vector<std::string>::iterator i = c_vec.begin(); i != c_vec.end(); ++i) { 
-        std::cout << *i << ", ";
-    }
-    std::cout << "]" << std::endl;
-
     // ladies and gentleman, the search...
 
     std::vector<std::map<std::string, double>> solutions;
     for(std::vector<std::string>::iterator i = c_vec.begin(); i != c_vec.end(); ++i) { 
-        //std::cout <<"i: "<< *i << std::endl;
 
         //reset offset
         for (std::vector<std::string>::iterator it = c_vec.begin(); it != c_vec.end(); ++it) {
@@ -298,7 +284,7 @@ void CostEngine::plan() {
         }
         double c_new = calculate_qos(target_system_model,strategy); // set offset
         c_new /= sensor_num;
-        std::cout << "offset=" << c_new << std::endl;
+        ROS_DEBUG("offset= %.2f", c_new);
 
         std::map<std::string,double> prev;
         double c_prev=0;
@@ -334,7 +320,6 @@ void CostEngine::plan() {
 
         for(std::vector<std::string>::iterator j = c_vec.begin(); j != c_vec.end(); ++j) { // all the others
             if(*i == *j) continue;
-            //std::cout <<"j: "<< *j << std::endl;
 
             if(error > 0){
                 do {
@@ -388,13 +373,13 @@ void CostEngine::plan() {
         strategy = *it;
         double c_new = calculate_qos(target_system_model,strategy);
 
-        std::cout << "strategy: [";
+        /*ROS_DEBUG("strategy: [");
         for (std::map<std::string,double>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
             if(itt->first.find("W_") != std::string::npos) {
-                std::cout<< itt->first << ":" << itt->second << ", ";
+                ROS_DEBUG("%s : %s, "itt->first,itt->second);
             }
         }
-        std::cout << "] = " << c_new << std::endl;
+        ROS_DEBUG("] = %s", std::string(c_new);*/
 
         if(/*!blacklisted(*it) && */(c_new > setpoint*(1-tolerance) && c_new < setpoint*(1+tolerance))){ // if not listed and converges, yay!
             execute();
@@ -406,7 +391,7 @@ void CostEngine::plan() {
 }
 
 void CostEngine::execute() {
-    std::cout << "[execute]" << std::endl;
+    ROS_DEBUG(" ");
 
     std::string content = "";
     size_t index = 0;
@@ -450,7 +435,7 @@ void CostEngine::execute() {
 
     enact.publish(msg);
 
-    std::cout << "[ " << content << "]" << std::endl;
-
+    ROS_DEBUG("[%s]",content.c_str());
+    
     return;
 }
