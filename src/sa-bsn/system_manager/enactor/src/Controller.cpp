@@ -56,9 +56,9 @@ void Controller::receiveEvent(const archlib::Event::ConstPtr& msg) {
 }
 
 void Controller::apply_reli_strategy(const std::string &component) {
-    std::cout << "r_ref[" << component << "] = "<< r_ref[component] <<std::endl;
-    std::cout << "r_curr[" << component << "] = "<< r_curr[component] <<std::endl;
-    std::cout << "kp[" << component << "] = "<< kp[component] <<std::endl;
+    ROS_DEBUG("r_ref[%s] = %.2f",component.c_str(),r_ref[component]);
+    ROS_DEBUG("r_curr[%s] = %.2f",component.c_str(), r_curr[component]);
+    ROS_DEBUG("kp[%s] = %.2f",component.c_str(), kp[component]);
 
     double error = r_ref[component] - r_curr[component]; //error = Rref - Rcurr
 
@@ -93,15 +93,12 @@ void Controller::apply_reli_strategy(const std::string &component) {
                 msg.target = component;
                 msg.action = "freq=" + std::to_string(freq[component]);
                 adapt.publish(msg);
-                /*std::cout << "################################################" << std::endl;
-                std::cout << "Adapting Centralhub" << std::endl;
-                std::cout << "Action: " << msg.action << std::endl;
-                std::cout << "################################################" << std::endl;*/
+                ROS_DEBUG("################################################");
+                ROS_DEBUG("Adapting Centralhub");
+                ROS_DEBUG("Action: %s", msg.action.c_str());
+                ROS_DEBUG("################################################");
             } /*else {
-                std::cout << "################################################" << std::endl;
-                std::cout << "COULD NOT ADAPT CENTRALHUB"<< std::endl;
-                std::cout << "Calculated frequency: " << new_freq << std::endl;
-                std::cout << "################################################" << std::endl;
+                ROS_ERROR("COULD NOT ADAPT CENTRALHUB");
             }*/
         } else {
             if(adaptation_parameter == "replicate_collect") {
@@ -150,9 +147,9 @@ void Controller::apply_reli_strategy(const std::string &component) {
 }
 
 void Controller::apply_cost_strategy(const std::string &component) {
-    std::cout << "c_ref[" << component << "] = "<< c_ref[component] <<std::endl;
-    std::cout << "c_curr[" << component << "] = "<< c_curr[component] <<std::endl;
-    std::cout << "kp[" << component << "] = "<< kp[component] <<std::endl;
+    ROS_DEBUG("r_ref[%s] = %.2f",component.c_str(),c_ref[component]);
+    ROS_DEBUG("r_curr[%s] = %.2f",component.c_str(), c_curr[component]);
+    ROS_DEBUG("kp[%s] = %.2f",component.c_str(), kp[component]);
 
     double error = c_ref[component] - c_curr[component]; //error = Cref - Ccurr
 
@@ -187,15 +184,12 @@ void Controller::apply_cost_strategy(const std::string &component) {
                 msg.target = component;
                 msg.action = "freq=" + std::to_string(freq[component]);
                 adapt.publish(msg);
-                /*std::cout << "################################################" << std::endl;
-                std::cout << "Adapting Centralhub" << std::endl;
-                std::cout << "Action: " << msg.action << std::endl;
-                std::cout << "################################################" << std::endl;*/
+                ROS_DEBUG("################################################");
+                ROS_DEBUG("Adapting Centralhub");
+                ROS_DEBUG("Action: %s", msg.action.c_str());
+                ROS_DEBUG("################################################");
             } /*else {
-                std::cout << "################################################" << std::endl;
-                std::cout << "COULD NOT ADAPT CENTRALHUB"<< std::endl;
-                std::cout << "Calculated frequency: " << new_freq << std::endl;
-                std::cout << "################################################" << std::endl;
+                ROS_ERROR("COULD NOT ADAPT CENTRALHUB");
             }*/
         } else {
             if(adaptation_parameter == "replicate_collect") {

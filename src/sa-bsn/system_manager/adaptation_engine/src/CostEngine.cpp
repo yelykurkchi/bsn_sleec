@@ -71,7 +71,7 @@ std::map<std::string, int> CostEngine::initialize_priority(std::vector<std::stri
 }
 
 void CostEngine::monitor() {
-    std::cout << "[monitoring]" << std::endl;
+    ROS_DEBUG(" ");
     cycles++;
 
     // request system status data for the knowledge repository

@@ -69,7 +69,7 @@ std::map<std::string, int> ReliabilityEngine::initialize_priority(std::vector<st
 }
 
 void ReliabilityEngine::monitor() {
-    std::cout << "[monitoring]" << std::endl;
+    ROS_DEBUG(" ");
     cycles++;
 
     // request system status data for the knowledge repository
@@ -96,7 +96,6 @@ void ReliabilityEngine::monitor() {
     
     //expecting smth like: "/g3t1_1:success,fail,success;/g4t1:success; ..."
     std::string ans = r_srv.response.content;
-    // std::cout << "received=> [" << ans << "]" << std::endl;
     if(ans == ""){
         ROS_ERROR("Received empty answer when asked for reliability.");
     }
@@ -116,7 +115,7 @@ void ReliabilityEngine::monitor() {
         std::vector<std::string> values = bsn::utils::split(second, ',');
 
         strategy["R_" + first] = stod(values[values.size()-1]);
-        std::cout << "R_" + first + " = " << strategy["R_" + first] << std::endl;
+        ROS_DEBUG("R_%s = %.2f",first.c_str(), strategy["R_" + first]);
     } 
 
     //request context status for all tasks
@@ -131,7 +130,6 @@ void ReliabilityEngine::monitor() {
     
     //expecting smth like: "/g3t1_1:activate;/g4t1:deactivate; ..."
     ans = c_srv.response.content;
-    //std::cout << "received=> [" << ans << "]" << std::endl;
 
     if (ans == "") {
         ROS_ERROR("Received empty answer when asked for event.");
@@ -157,7 +155,7 @@ void ReliabilityEngine::monitor() {
                 if (value == "deactivate") {
                     strategy["R_" + first] = 1;
                     deactivatedComponents["R_" + first] = 1;
-                    std::cout << first + " was deactivated and its reliability was set to 1" << std::endl;
+                    ROS_WARN("%s was deactivated and its reliability was set to 1", first.c_str());
                 }
             } else {
                 if (value == "activate") {
@@ -175,12 +173,7 @@ void ReliabilityEngine::monitor() {
 }
 
 void ReliabilityEngine::analyze() {
-    std::cout << "[analyze]" << std::endl;
-
-    //std::cout << "strategy: [";
-    //for (std::map<std::string,double>::iterator itt = strategy.begin(); itt != strategy.end(); ++itt) {
-    //   std::cout<< itt->first << ":" << itt->second << ", ";
-    //}
+    ROS_DEBUG(" ");
 
     double r_curr;
     double error;
@@ -199,13 +192,13 @@ void ReliabilityEngine::analyze() {
 }
 
 void ReliabilityEngine::plan() {
-    std::cout << "[reli plan]" << std::endl;
+    ROS_DEBUG(" ");
 
-    std::cout << "setpoint= " << setpoint << std::endl;
+    ROS_DEBUG ("setpoint= %.2f", setpoint);
     double r_curr = calculate_qos(target_system_model,strategy);
-    std::cout << "r_curr= " << r_curr << std::endl;
+    ROS_DEBUG("r_curr= %.2f",r_curr);
     double error = setpoint - r_curr;
-    std::cout << "error= " << error << std::endl;
+    ROS_DEBUG("error= %.2f",error);
 
     //reset the formula_str
     std::vector<std::string> r_vec;
@@ -235,19 +228,10 @@ void ReliabilityEngine::plan() {
         }
     }
 
-    //print ordered r_vec
-    std::cout << "ordered r_vec: [";
-    for(std::vector<std::string>::iterator i = r_vec.begin(); i != r_vec.end(); ++i) { 
-        std::cout << *i << ", ";
-    }
-    std::cout << "]" << std::endl;
-
     // ladies and gentleman, the search...
 
     std::vector<std::map<std::string, double>> solutions;
     for(std::vector<std::string>::iterator i = r_vec.begin(); i != r_vec.end(); ++i) { 
-        //std::cout <<"i: "<< *i << std::endl;
-
         //reset offset
         for (std::vector<std::string>::iterator it = r_vec.begin(); it != r_vec.end(); ++it) {
             if(error>0){
@@ -257,7 +241,7 @@ void ReliabilityEngine::plan() {
             }
         }
         double r_new = calculate_qos(target_system_model,strategy);
-        std::cout << "offset=" << r_new << std::endl;
+        ROS_DEBUG("offset= %.2f", r_new);
 
         std::map<std::string,double> prev;
         double r_prev=0;
@@ -282,7 +266,6 @@ void ReliabilityEngine::plan() {
 
         for(std::vector<std::string>::iterator j = r_vec.begin(); j != r_vec.end(); ++j) { // all the others
             if(*i == *j) continue;
-            //std::cout <<"j: "<< *j << std::endl;
 
             if(error > 0){
                 do {
@@ -310,13 +293,13 @@ void ReliabilityEngine::plan() {
         strategy = *it;
         double r_new = calculate_qos(target_system_model,strategy);
 
-        std::cout << "strategy: [";
+        /*ROS_DEBUG("strategy: [");
         for (std::map<std::string,double>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
             if(itt->first.find("R_") != std::string::npos) {
-                std::cout<< itt->first << ":" << itt->second << ", ";
+                ROS_DEBUG("%s : %s, "itt->first,itt->second);
             }
         }
-        std::cout << "] = " << r_new << std::endl;
+        ROS_DEBUG("] = %s", std::string(r_new);*/
 
         if(/*!blacklisted(*it) && */(r_new > setpoint*(1-tolerance) && r_new < setpoint*(1+tolerance))){ // if not listed and converges, yay!
             execute();
@@ -328,7 +311,7 @@ void ReliabilityEngine::plan() {
 }
 
 void ReliabilityEngine::execute() {
-    std::cout << "[execute]" << std::endl;
+    ROS_DEBUG(" ");
 
     std::string content = "";
     size_t index = 0;
@@ -371,7 +354,7 @@ void ReliabilityEngine::execute() {
 
     enact.publish(msg);
 
-    std::cout << "[ " << content << "]" << std::endl;
+    ROS_DEBUG("[%s]",content.c_str());
 
     return;
 }

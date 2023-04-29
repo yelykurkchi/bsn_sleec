@@ -1,5 +1,4 @@
 #include "enactor/Enactor.hpp"
-#define W(x) std::cer%sr,#%sx," = %s",x);
 
 Enactor::Enactor(int &argc, char **argv, std::string name) : ROSComponent(argc, argv, name), cycles(0), stability_margin(0.02) {}
 

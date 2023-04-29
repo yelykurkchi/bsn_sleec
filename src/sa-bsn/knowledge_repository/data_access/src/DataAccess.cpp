@@ -1,7 +1,5 @@
 #include "data_access/DataAccess.hpp"
 
-#define W(x) std::cerr << #x << " = " << x << std::endl;
-
 DataAccess::DataAccess(int  &argc, char **argv, const std::string &name) : ROSComponent(argc, argv, name), fp(), event_filepath(), status_filepath(), logical_clock(0), statusVec(), eventVec(), status(), buffer_size(), reliability_formula(), cost_formula() {}
 DataAccess::~DataAccess() {}
 
