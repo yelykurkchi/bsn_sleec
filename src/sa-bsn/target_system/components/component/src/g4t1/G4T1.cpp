@@ -1,5 +1,4 @@
 #include "component/g4t1/G4T1.hpp"
-#define W(x) std::cerr << #x << " = " << x << std::endl;
 
 #define BATT_UNIT 0.001
 
@@ -151,16 +150,16 @@ void G4T1::process(){
         patient_risk = "VERY CRITICAL RISK";
     }
 
-    std::cout << std::endl << "*****************************************" << std::endl;
-    std::cout << "PatientStatusInfo#" << std::endl;
-    std::cout << "| THERM_RISK: " << trm_risk << std::endl;
-    std::cout << "| ECG_RISK: " << ecg_risk << std::endl;
-    std::cout << "| OXIM_RISK: " << oxi_risk << std::endl;
-    std::cout << "| ABPS_RISK: " << abps_risk << std::endl;
-    std::cout << "| ABPD_RISK: " << abpd_risk << std::endl;
-    std::cout << "| GLC_RISK: " << glc_risk << std::endl;
-    std::cout << "| PATIENT_STATE:" << patient_risk << std::endl;
-    std::cout << "*****************************************" << std::endl;
+    ROS_INFO("*****************************************");
+    ROS_INFO("PatientStatusInfo#");
+    ROS_INFO("| THERM_RISK: %s", std::to_string(trm_risk).c_str());
+    ROS_INFO("| ECG_RISK: %s", std::to_string(ecg_risk).c_str());
+    ROS_INFO("| OXIM_RISK: %s", std::to_string(oxi_risk).c_str());
+    ROS_INFO("| ABPS_RISK: %s", std::to_string(abps_risk).c_str());
+    ROS_INFO("| ABPD_RISK: %s", std::to_string(abpd_risk).c_str());
+    ROS_INFO("| GLC_RISK: %s", std::to_string(glc_risk).c_str());
+    ROS_INFO("| PATIENT_STATE: %s", patient_risk.c_str());
+    ROS_INFO("*****************************************");
 }
 
 int32_t G4T1::getSensorId(std::string type) {
@@ -177,7 +176,7 @@ int32_t G4T1::getSensorId(std::string type) {
     else if (type == "glucosemeter")        
         return 5;
     else {
-        std::cout << "UNKNOWN TYPE " + type << std::endl;
+        ROS_WARN("UNKNOWN TYPE: %s", type.c_str());
         return -1;
     }
 }

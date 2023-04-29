@@ -35,7 +35,7 @@ int32_t Sensor::run() {
         try {
             body();
         } catch (const std::exception& e) {
-            std::cout << "sensor failed: " << e.what() << std::endl;
+            ROS_ERROR( "SENSOR FAILED: %s", e.what());
             sendStatus("fail");
             cost = 0;
         } 

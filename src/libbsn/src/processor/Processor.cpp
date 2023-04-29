@@ -19,7 +19,6 @@ namespace bsn {
             else if (type == "glucosemeter")        
                 return 5;
             else {
-                cout << "UNKNOWN TYPE " + type + '\n';
                 return -1;
             }
 
@@ -109,14 +108,6 @@ namespace bsn {
             } else {
                 //Se o máximo é igual ao mínimo, a média será calculada e dará o mesmo valor
                 risk_status = avg;
-            }
-
-            // 85.0 é um número totalmente ARBITRARIO
-            if(risk_status > 66.0){
-                cout << "============ EMERGENCY ============(" << risk_status << '%' << ")" << endl;
-            }
-            else{
-                cout << "General risk status: " << risk_status << '%' << endl;
             }
 
             return risk_status;
