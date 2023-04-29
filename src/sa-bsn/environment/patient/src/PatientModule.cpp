@@ -91,7 +91,7 @@ bool PatientModule::getPatientData(services::PatientData::Request &request,
     
     response.data = patientData[request.vitalSign].getValue();
     
-    std::cout << "Send " + request.vitalSign + " data." << std::endl;
+    ROS_INFO("Answered a request for %s's data.", request.vitalSign.c_str());
 
     return true;
 }
@@ -102,7 +102,7 @@ void PatientModule::body() {
         if (p.second >= (vitalSignsChanges[p.first] + vitalSignsOffsets[p.first])) {
             patientData[p.first].nextState();
             p.second = vitalSignsOffsets[p.first];
-            std::cout << "Changed " + p.first + " state." << std::endl;
+            ROS_DEBUG("Transitioned %s's state", p.first.c_str());
         } else {
             p.second += period;
         }
