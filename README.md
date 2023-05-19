@@ -34,6 +34,8 @@ _(Jump this step if you are in our provided VM)_
 
 [Rosdep](https://wiki.ros.org/rosdep#Installing_rosdep) for ROS dependencies management.
 
+[Rosmon](http://wiki.ros.org/rosmon) for execution and node monitoring.
+
 #### **Create clone and build**
 
 Clone the sa-bsn.
@@ -58,6 +60,17 @@ catkin_make run_tests && catkin_test_results
 ### Execute the SA-BSN
 
 The SA-BSN's execution relies on a single command, where the argument (i.e., 600) represents the execution time (in seconds):
+
+```
+roscore
+```
+
+```
+cd bsn && 
+mon launch bsn.launch
+``` 
+
+In case you don't have rosmon installed, try:
 
 ```
 cd bsn && 

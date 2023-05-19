@@ -1,7 +1,5 @@
 #include "data_access/DataAccess.hpp"
 
-#define W(x) std::cerr << #x << " = " << x << std::endl;
-
 DataAccess::DataAccess(int  &argc, char **argv, const std::string &name) : ROSComponent(argc, argv, name), fp(), event_filepath(), status_filepath(), logical_clock(0), statusVec(), eventVec(), status(), buffer_size(), reliability_formula(), cost_formula() {}
 DataAccess::~DataAccess() {}
 
@@ -140,7 +138,7 @@ void DataAccess::body() {
 }
 
 void DataAccess::receivePersistMessage(const archlib::Persist::ConstPtr& msg) {
-    ROS_INFO("I heard: [%s]", msg->type.c_str());
+    ROS_DEBUG("I heard: [%s]", msg->type.c_str());
     ++logical_clock;
 
     if (msg->type == "Status") {

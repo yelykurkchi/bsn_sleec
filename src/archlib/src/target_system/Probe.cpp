@@ -20,12 +20,12 @@ namespace arch {
         }
 
         void Probe::collectEvent(const archlib::Event::ConstPtr& msg) {
-            //ROS_INFO("I heard: [%s: %s]", msg->source.c_str(), msg->content.c_str());
+            //ROS_DEBUG("I heard: [%s: %s]", msg->source.c_str(), msg->content.c_str());
             log_event.publish(msg);
         }
 
         void Probe::collectStatus(const archlib::Status::ConstPtr& msg) {
-            //ROS_INFO("I heard: [%s: %s]", msg->source.c_str(), msg->content.c_str());
+            //ROS_DEBUG("I heard: [%s: %s]", msg->source.c_str(), msg->content.c_str());
             log_status.publish(msg);
         }
 
