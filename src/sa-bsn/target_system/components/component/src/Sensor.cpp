@@ -21,9 +21,15 @@ int32_t Sensor::run() {
         Component::shutdownComponent();
     }
 
+
     ros::NodeHandle nh;
     ros::Subscriber noise_subs = nh.subscribe("uncertainty_"+ros::this_node::getName(), 10, &Sensor::injectUncertainty, this);
     ros::Subscriber reconfig_subs = nh.subscribe("reconfigure_"+ros::this_node::getName(), 10, &Sensor::reconfigure, this);
+
+    nh.getParam("connect_sensor", connected_sensor);
+    ROS_INFO("Sensor connected = %d", connected_sensor);
+    
+
 
     sendStatus("init");
     ros::spinOnce();

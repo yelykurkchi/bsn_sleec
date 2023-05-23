@@ -12,6 +12,9 @@
 #include "libbsn/resource/Battery.hpp"
 #include "libbsn/utils/utils.hpp"
 
+#include <std_msgs/Float32.h>
+#include <std_srvs/SetBool.h>
+
 class Sensor : public arch::target_system::Component {
 
     public:
@@ -52,6 +55,7 @@ class Sensor : public arch::target_system::Component {
         bool instant_recharge;
         bool shouldStart;
         double cost;
+        bool connected_sensor;
 };
 
 #endif 

@@ -36,6 +36,8 @@ _(Jump this step if you are in our provided VM)_
 
 [Rosmon](http://wiki.ros.org/rosmon) for execution and node monitoring.
 
+[Rosserial](http://wiki.ros.org/rosserial_arduino) (optional) for execution with Arduino and sensors
+
 #### **Create clone and build**
 
 Clone the sa-bsn.
@@ -68,6 +70,21 @@ roscore
 ```
 cd bsn && 
 mon launch bsn.launch
+``` 
+
+If you want to coneect with Arduino and real sensors use:
+
+```
+roscore
+rosrun rosserial_python serial_node.py "Arduino serial port"
+```
+
+The Arduino serial port is given by the operating system. In ubuntu it is usually "/dev/ttyACM0".
+
+
+```
+cd bsn && 
+mon launch bsn_sensors.launch
 ``` 
 
 In case you don't have rosmon installed, try:
