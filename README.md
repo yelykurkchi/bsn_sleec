@@ -76,8 +76,11 @@ If you want to coneect with Arduino and real sensors use:
 
 ```
 roscore
-rosrun rosserial_python serial_node.py "Arduino port address"
+rosrun rosserial_python serial_node.py "Arduino serial port"
 ```
+
+The Arduino serial port is given by the operating system. In ubuntu it is usually "/dev/ttyACM0".
+
 
 ```
 cd bsn && 
