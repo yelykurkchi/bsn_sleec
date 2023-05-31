@@ -154,7 +154,7 @@ Main Authors
 * [**Eric B. Gil**](https://github.com/ericbg27)
 * [**Samuel Couto**](https://github.com/SCouto97)
 
-Adviser: [**Genaína N. Rodrigues**](https://cic.unb.br/~genaina)
+Adviser: [**Genaína N. Rodrigues**](https://genaina.github.io/)
 
 ## Acknowledgment
 
