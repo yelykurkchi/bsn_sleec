@@ -1,14 +1,29 @@
 # Self-Adaptive Body Sensor Network (SA-BSN)
 
-![Travis (.org)](https://img.shields.io/travis/lesunb/bsn) ![GitHub](https://img.shields.io/github/license/lesunb/bsn) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/lesunb/bsn) [![DOI](https://zenodo.org/badge/233956479.svg)](https://zenodo.org/badge/latestdoi/233956479)
+![GitHub](https://img.shields.io/github/license/lesunb/bsn) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/lesunb/bsn) [![DOI](https://zenodo.org/badge/233956479.svg)](https://zenodo.org/badge/latestdoi/233956479)
 
-This is an implementation of the SA-BSN. So far, the SA-BSN was used for experimentation on solutions for adaptation on the Self-Adaptive Software Systems domain [[1]](https://doi.org/10.1145/3194133.3194147)[[2]](https://doi.org/10.1109/SEAMS.2019.00020)[[3]](https://doi.org/10.1145/3387939.3391595). Moreover, information regarding the prototype behavior and how to develop your own manager is provided in the [website](https://bodysensornetwork.herokuapp.com/), which contains an executable instance of the BSN. 
+The Self-Adaptive Body Sensor Network (SA-BSN) features an exempalr of self-adaptive system [[1]](https://doi.org/10.1109/SEAMS51251.2021.00037) designed for experimentation on solutions for adaptation in the domain of Self-Adaptive Software Systems. Body Sensor Networks (BSNs) are networks of wearable and implantable sensors that collect physiological data (e.g., heart beat rate, blood oxigenation) from the human body. These networks are often considered safety-critical, as they enable real-time monitoring of vital signs and other health-related parameters. In addition, they interface a body of knowledge of ever evolving diseases and health conditions with a the vastness of human individuality. No solution to indentification of health conditions is comprehensive enough to tackle the current nor future diseases that may pose a threat to human condition. The self-adaptive body sensor network paves the way to such ambitious goal.
+
+The SA-BSN provides a platform for researchers and developers to explore and evaluate adaptive solutions in the Self-Adaptive Software Systems domain. It has been utilized in various experiments and studies, as referenced in the following publications: [[2]](https://doi.org/10.1145/3194133.3194147)[[3]](https://doi.org/10.1109/SEAMS.2019.00020)[[4]](https://doi.org/10.1145/3387939.3391595).
+
+## Recommended Reference
+
+```
+@INPROCEEDINGS{bsn,
+  author={Gil, Eric Bernd and Caldas, Ricardo and Rodrigues, Arthur and da Silva, Gabriel Levi Gomes and Rodrigues, Genaína Nunes and Pelliccione, Patrizio},
+  booktitle={2021 International Symposium on Software Engineering for Adaptive and Self-Managing Systems (SEAMS)}, 
+  title={Body Sensor Network: A Self-Adaptive System Exemplar in the Healthcare Domain}, 
+  year={2021},
+  pages={224-230},
+  doi={10.1109/SEAMS51251.2021.00037}}
+``` 
+
+## Getting Started
 
 Check our [demonstration video of the SA-BSN](https://youtu.be/iDEd_tW9JZE).
 
 Download our [SA-BSN Virtual Machine (Virtual Box) for People in a Hurry](https://drive.google.com/file/d/1RYrZ27LWRvqaxsgNcApXMxwrLK6BBPsV/view?usp=sharing). 
 (_~10 minutes!!_)
-
 
 The password from the virtual machine is the same as the user. So,
 
@@ -18,8 +33,6 @@ password: bsn
 ```
 
 To compile and run the SA-BSN, follow the instructions (tested on Linux Ubuntu 18.04 with ROS Melodic): 
-
-## Detailed instructions to build, execute and analyze the SA-BSN
 
 ### Build the SA-BSN
 
@@ -81,7 +94,6 @@ rosrun rosserial_python serial_node.py "Arduino serial port"
 
 The Arduino serial port is given by the operating system. In ubuntu it is usually "/dev/ttyACM0".
 
-
 ```
 cd bsn && 
 mon launch bsn_sensors.launch
@@ -136,7 +148,7 @@ source ~/.bashrc
 
 Main Authors
 
-* [**Ricardo Caldas**](https://github.com/rdinizcal)
+* [**Ricardo Caldas**](https://rdinizcal.github.io/)
 * [**Gabriel Levi**](https://github.com/gabrielevi10)
 * [**Léo Moraes**](https://github.com/leooleo)  
 * [**Eric B. Gil**](https://github.com/ericbg27)
