@@ -94,7 +94,7 @@ double G3T1_1::collect() {
         ros::ServiceClient client = handle.serviceClient<std_srvs::SetBool>("spo2");
         std_srvs::SetBool srv;
         srv.request.data = true;
-            if (client.call(srv)) {
+        if (client.call(srv)) {
             res = srv.response.message;
             m_data = std::stof(res);
             ROS_INFO("new data collected: [%s]", std::to_string(m_data).c_str());
