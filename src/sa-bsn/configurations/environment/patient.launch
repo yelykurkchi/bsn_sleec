@@ -24,7 +24,7 @@
     <param name="glucose_Offset" value="10"/>
     <param name="gps_Offset" value="10"/>
 
-    <!-- Markov chain for oxigenation -->
+    <!-- MarkovRange chain for oxigenation -->
     <param name="oxigenation_State0" value="0,0,0,0,0" />
     <param name="oxigenation_State1" value="0,0,0,0,0" />
     <param name="oxigenation_State2" value="0,0,90,8,2" />
@@ -38,7 +38,7 @@
     <param name="oxigenation_MidRisk1" value="55,65" />
     <param name="oxigenation_HighRisk1" value="0,55" />
 
-    <!-- Markov chain for heart frequency -->
+    <!-- MarkovRange chain for heart frequency -->
     <param name="heart_rate_State0" value="72,21,4,2,1" />
     <param name="heart_rate_State1" value="14,61,19,4,2" />
     <param name="heart_rate_State2" value="1,17,60,20,2" />
@@ -52,7 +52,7 @@
     <param name="heart_rate_MidRisk1" value="97,115" />
     <param name="heart_rate_HighRisk1" value="115,300" />
 
-    <!-- Markov chain for temperature -->
+    <!-- MarkovRange chain for temperature -->
     <param name="temperature_State0" value="25,51,21,3,0" />
     <param name="temperature_State1" value="5,50,43,2,0" />
     <param name="temperature_State2" value="0,4,85,11,0" />
@@ -66,7 +66,7 @@
     <param name="temperature_MidRisk1" value="38,40.99" />
     <param name="temperature_HighRisk1" value="41,50" />
 
-    <!-- Markov chain for diastolic pressure -->
+    <!-- MarkovRange chain for diastolic pressure -->
     <param name="abpd_State0" value="0,0,0,0,0" />
     <param name="abpd_State1" value="0,0,0,0,0" />
     <param name="abpd_State2" value="0,0,94,4,2" />
@@ -80,7 +80,7 @@
     <param name="abpd_MidRisk1" value="80,90" />
     <param name="abpd_HighRisk1" value="90,300" />
 
-    <!-- Markov chain for systolic pressure -->
+    <!-- MarkovRange chain for systolic pressure -->
     <param name="abps_State0" value="0,0,0,0,0" />
     <param name="abps_State1" value="0,0,0,0,0" />
     <param name="abps_State2" value="0,0,79,18,3" />
@@ -94,7 +94,7 @@
     <param name="abps_MidRisk1" value="120,140" />
     <param name="abps_HighRisk1" value="140,300" />
 
-    <!-- Markov chain for glucose -->
+    <!-- MarkovRange chain for glucose -->
     <param name="glucose_State0" value="20,40,22,15,3" />
     <param name="glucose_State1" value="10,50,20,15,5" />
     <param name="glucose_State2" value="4,9,65,12,10" />
@@ -108,7 +108,7 @@
     <param name="glucose_MidRisk1" value="96,119.99" />
     <param name="glucose_HighRisk1" value="120,200" />
 
-    <!-- Markov chain for gps -->
+    <!-- MarkovRange chain for gps -->
     <param name="glucose_State0" value="20,40,22,15,3" />
     <param name="glucose_State1" value="10,50,20,15,5" />
     <param name="glucose_State2" value="4,9,65,12,10" />

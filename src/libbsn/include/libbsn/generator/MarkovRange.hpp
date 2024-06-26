@@ -17,14 +17,14 @@
 namespace bsn {
     namespace generator {
 
-        class Markov {
+        class MarkovRange {
             public:
-                Markov();
+                MarkovRange();
                 
-                Markov(std::array<float, 25> transitions, std::array<bsn::range::Range, 5> states, int32_t initialState);
+                MarkovRange(std::array<float, 25> transitions, std::array<bsn::range::Range, 5> states, int32_t initialState);
 
-                Markov(const Markov & /*obj*/);
-                Markov& operator=(const Markov & /*obj*/);
+                MarkovRange(const MarkovRange & /*obj*/);
+                MarkovRange& operator=(const MarkovRange & /*obj*/);
 
                 // Contém a probabilidade de todas as transições
                 std::array<float,25> transitions;
@@ -35,8 +35,6 @@ namespace bsn {
 
                 // Calcula o próximo estado da cadeia de markov
                 void next_state();
-                // Calcula um valor baseado no intervalo do estado atual
-                double calculate_state();
 
                 const std::string toString() const;
         };

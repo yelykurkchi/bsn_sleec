@@ -5,7 +5,11 @@ namespace bsn {
     namespace generator {
         DataGenerator::DataGenerator() : markovChain(), seed() {}
 
-        DataGenerator::DataGenerator(const Markov& markov) : 
+        DataGenerator::DataGenerator(const MarkovRange& markov) : 
+            markovChain(markov),
+            seed() {}
+            
+        DataGenerator::DataGenerator(const MarkovString& markov) : 
             markovChain(markov),
             seed() {}
 
@@ -56,11 +60,15 @@ namespace bsn {
                 throw std::out_of_range("current state is out of bounds");
             }
 
-            bsn::range::Range range = markovChain.states[markovChain.currentState];
-            // Cria um número aleatório baseado no range
-            std::uniform_real_distribution<double> value_generator(range.getLowerBound(), range.getUpperBound());
-            double val = value_generator(seed);
-            return val;
+            if(typeid(markovChain).name() == "MarkovRange"){
+                bsn::range::Range range = markovChain.states[markovChain.currentState];
+                // Cria um número aleatório baseado no range
+                std::uniform_real_distribution<double> value_generator(range.getLowerBound(), range.getUpperBound());
+                double val = value_generator(seed);
+                return val;
+            } else if (typeid(markovChain).name() == "MarkovString"){
+                return markovChain.states[markovChain.currentState];
+            }
         }
 
         double DataGenerator::getValue() {

@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 #include "libbsn/generator/DataGenerator.hpp"
-#include "libbsn/generator/Markov.hpp"
+#include "libbsn/generator/MarkovRange.hpp"
 #include "libbsn/range/Range.hpp"
 
 using namespace bsn::range;
@@ -13,7 +13,7 @@ class DataGeneratorTest : public testing::Test {
     protected:
         std::array<float,25> transitions;
         std::array<Range, 5> states;
-        Markov mk;
+        MarkovRange mk;
 
         DataGeneratorTest() : transitions(), states(), mk() {}
 

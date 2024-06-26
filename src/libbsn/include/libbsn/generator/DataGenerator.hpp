@@ -1,7 +1,7 @@
 #ifndef DATAGENERATOR_HPP
 #define DATAGENERATOR_HPP
 
-#include "libbsn/generator/Markov.hpp"
+#include "libbsn/generator/MarkovRange.hpp"
 
 #include <random>
 #include <stdint.h>
@@ -11,7 +11,7 @@ namespace bsn {
         class DataGenerator {
             public:
                 DataGenerator();
-                DataGenerator(const Markov& markov);
+                DataGenerator(const MarkovRange& markov);
                 DataGenerator(const DataGenerator& obj);
                 ~DataGenerator();
 
@@ -24,7 +24,7 @@ namespace bsn {
             private:
                 double calculateValue();
 
-                Markov markovChain;
+                MarkovRange markovChain;
                 double value;
                 std::mt19937 seed;
         };

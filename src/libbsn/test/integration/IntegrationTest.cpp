@@ -2,7 +2,7 @@
 // #include <stdint.h>
 
 // #include "libbsn/range/Range.hpp"
-// #include "libbsn/generator/Markov.hpp"
+// #include "libbsn/generator/MarkovRange.hpp"
 // #include "libbsn/filters/MovingAverage.hpp"
 // #include "libbsn/configuration/SensorConfiguration.hpp"
 
@@ -18,9 +18,9 @@
 //         MovingAverage avg2;
 //         MovingAverage avg4;
 
-//         Markov mar1;
-//         Markov mar2;
-//         Markov mar4;
+//         MarkovRange mar1;
+//         MarkovRange mar2;
+//         MarkovRange mar4;
 
 //         Range l;
 //         Range m1;

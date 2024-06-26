@@ -8,7 +8,7 @@
 
 #include "libbsn/range/Range.hpp"
 #include "libbsn/resource/Battery.hpp"
-#include "libbsn/generator/Markov.hpp"
+#include "libbsn/generator/MarkovRange.hpp"
 #include "libbsn/generator/DataGenerator.hpp"
 #include "libbsn/filters/MovingAverage.hpp"
 #include "libbsn/utils/utils.hpp"
@@ -40,7 +40,7 @@ class G3T1_4 : public Sensor {
         void transfer(const double &data);
 
   	private:
-		bsn::generator::Markov markov;
+		bsn::generator::MarkovRange markov;
 		bsn::generator::DataGenerator dataGenerator;		
 		bsn::filters::MovingAverage filter;
 		bsn::configuration::SensorConfiguration sensorConfig;

@@ -9,6 +9,7 @@ void PatientModule::setUp() {
 
     // TODO change Operation to static
     std::string vitalSigns;
+    std::string otherSensors;
     service = nh.advertiseService("getPatientData", &PatientModule::getPatientData, this);
     double aux;
 
@@ -30,15 +31,24 @@ void PatientModule::setUp() {
     }
 
     for (const std::string& s : splittedVitalSigns) {
-        patientData[s] = configureDataGenerator(s);
+        patientData[s] = configureVitalSignDataGenerator(s);
     }
+    
+    // Get what other sensors this module will simulate
+    nh.getParam("otherSensors", otherSensors);
+    gpsFrequency = 0;
+    nh.getParam("gps_Change", aux);
+    gpsChanges = 1/aux;
+    nh.getParam("gps_Offset", gpsOffset);
+
+    gpsData = configureGPSDataGenerator("gps");
 
     rosComponentDescriptor.setFreq(frequency);
     
     period = 1/frequency;
 }
 
-bsn::generator::DataGenerator PatientModule::configureDataGenerator(const std::string& vitalSign) {
+bsn::generator::DataGenerator PatientModule::configureVitalSignDataGenerator(const std::string& vitalSign) {
     srand(time(NULL));
     
     std::vector<std::string> t_probs;
@@ -83,12 +93,46 @@ bsn::generator::DataGenerator PatientModule::configureDataGenerator(const std::s
     return dataGenerator;
 }
 
+bsn::generator::DataGenerator PatientModule::configureGPSDataGenerator(const std::string& gps) {
+    srand(time(NULL));
+    
+    std::vector<std::string> t_probs;
+    std::array<float, 25> transitions;
+    std::array<std::string,5> locations;
+    std::string s;
+    ros::NodeHandle handle;
+
+    for(uint32_t i = 0; i < transitions.size(); i++){
+        for(uint32_t j = 0; j < 5; j++){
+            handle.getParam(gps + "_State" + std::to_string(j), s);
+            t_probs = bsn::utils::split(s, ',');
+            for(uint32_t k = 0; k < 5; k++){
+                transitions[i++] = std::stod(t_probs[k]);
+            }
+        }
+    }
+    
+    for(uint32_t i = 0; i < locations.size(); i++){
+        locations[i] = handle.getParam(gps + "_loc" + std::to_string(i), s);
+    }
+
+    bsn::generator::Markov markov(transitions, locations, 2);
+    bsn::generator::DataGenerator dataGenerator(markov);
+    dataGenerator.setSeed();
+
+    return dataGenerator;
+}
+
 void PatientModule::tearDown() {}
 
 bool PatientModule::getPatientData(services::PatientData::Request &request, 
                                 services::PatientData::Response &response) {
     
-    response.data = patientData[request.vitalSign].getValue();
+    if(request.vitalSign=="gps"){
+        response.data =  gpsData.getValue();
+    } else {
+        response.data = patientData[request.vitalSign].getValue();
+    }
     
     ROS_INFO("Answered a request for %s's data.", request.vitalSign.c_str());
 
@@ -96,6 +140,7 @@ bool PatientModule::getPatientData(services::PatientData::Request &request,
 }
 
 void PatientModule::body() {
+    // Loops over all of the sensors and changes the states with time (frequency, offset)
     for (auto &p : vitalSignsFrequencies) {
         
         if (p.second >= (vitalSignsChanges[p.first] + vitalSignsOffsets[p.first])) {
@@ -105,7 +150,13 @@ void PatientModule::body() {
         } else {
             p.second += period;
         }
-        
+    }
+    if (gps_Frequency >= gpsChanges + gpsOffset){
+        gpsData.nextState();
+        gps_Frequency = gpsOffset;
+        ROS_DEBUG("Transitioned GPS' state");
+    } else {
+        gps_Frequency += period;
     }
 }
 

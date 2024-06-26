@@ -26,7 +26,7 @@ class PatientModule : public arch::ROSComponent {
         std::map<std::string, double> vitalSignsChanges;
         std::map<std::string, double> vitalSignsOffsets;
 
-        double gps_period;
+        bsn::generator::DataGenerator gpstData;
         double gpsFrequency;
         double gpsChanges;
         double gpsOffset;
