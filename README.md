@@ -6,7 +6,7 @@ The Self-Adaptive Body Sensor Network (SA-BSN) features an exempalr of self-adap
 
 The SA-BSN provides a platform for researchers and developers to explore and evaluate adaptive solutions in the Self-Adaptive Software Systems domain. It has been utilized in various experiments and studies, as referenced in the following publications: [[2]](https://doi.org/10.1145/3194133.3194147)[[3]](https://doi.org/10.1109/SEAMS.2019.00020)[[4]](https://doi.org/10.1145/3387939.3391595).
 
-## Recommended Reference
+<!--## Recommended Reference
 
 ```
 @INPROCEEDINGS{bsn,
@@ -16,7 +16,7 @@ The SA-BSN provides a platform for researchers and developers to explore and eva
   year={2021},
   pages={224-230},
   doi={10.1109/SEAMS51251.2021.00037}}
-``` 
+``` -->
 
 ## Getting Started
 
@@ -145,7 +145,7 @@ You might want to source the setup.bash inside the catkin workspace:
 echo "source ~/bsn/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
-
+<!-- 
 Main Authors
 
 * [**Ricardo Caldas**](https://rdinizcal.github.io/)
@@ -158,4 +158,4 @@ Adviser: [**Genaína N. Rodrigues**](https://genaina.github.io/)
 
 ## Acknowledgment
 
-This study was financed in part by CAPES-Brasil – Finance Code 001, through CAPES scholarship, by CNpq under grant number 306017/2018-0, by University of Brasilia under Call DPI/DPG 03/2020, by FAPDF Call 03/2018 by the Wallenberg Al, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation
+This study was financed in part by CAPES-Brasil – Finance Code 001, through CAPES scholarship, by CNpq under grant number 306017/2018-0, by University of Brasilia under Call DPI/DPG 03/2020, by FAPDF Call 03/2018 by the Wallenberg Al, Autonomous Systems and Software Program (WASP) funded by the Knut and Alice Wallenberg Foundation-->
